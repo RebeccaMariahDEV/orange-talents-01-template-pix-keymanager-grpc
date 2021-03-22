@@ -38,6 +38,7 @@ dependencies {
     implementation("io.micronaut.sql:micronaut-hibernate-jpa")
     implementation("io.micronaut.data:micronaut-data-hibernate-jpa")
     implementation("io.micronaut:micronaut-validation")
+    implementation("io.micronaut:micronaut-http-client")
     annotationProcessor("io.micronaut:micronaut-validation")
     annotationProcessor("io.micronaut.data:micronaut-data-processor")
     runtimeOnly("ch.qos.logback:logback-classic")

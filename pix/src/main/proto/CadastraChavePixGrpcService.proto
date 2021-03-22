@@ -32,5 +32,5 @@ message PixRequest {
 }
 
 message PixResponse {
-  string chaveId = 1;
+  string clietId = 1;
 }

@@ -1,17 +1,17 @@
 package br.com.zup.contas
 
 import javax.persistence.*
-import javax.validation.constraints.NotBlank
-import javax.validation.constraints.NotNull
 
 @Entity
 class Conta(
-    val tipo: TipoConta,
-    @ManyToOne
-    val instituicao: Instituicao,
-    val agencia: Int,
-    val numero: Int,
-    val titular: Titular
+    val agencia: String,
+    val numero: String,
+    @field:ManyToOne(cascade = [CascadeType.PERSIST, CascadeType.MERGE])
+    val instituicao: Instituicao?,
+    @field:ManyToOne(cascade = [CascadeType.PERSIST, CascadeType.MERGE])
+    val titular: Titular?,
+    @field: Enumerated(EnumType.STRING)
+    var tipo: TipoConta?
 
 ) {
     @Id

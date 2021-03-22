@@ -13,7 +13,7 @@ import javax.validation.constraints.Size
 @Entity
 data class ChavePix(
     @field:NotBlank @field:Size(max = 77) val chaveCadastrada: String,
-    @field:NotNull val tipo: ChaveUsuario,
+    @field:NotNull val tipo: TipoChave,
     @field:ManyToOne val conta: Conta
 ) {
     @Id

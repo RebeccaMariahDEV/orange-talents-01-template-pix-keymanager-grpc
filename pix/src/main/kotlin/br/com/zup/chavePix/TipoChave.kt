@@ -3,10 +3,10 @@ package br.com.zup.chavePix
 import io.micronaut.validation.validator.constraints.EmailValidator
 
 
-enum class ChaveUsuario {
+enum class TipoChave {
     CPF {
         //forum de kotlin, voltar e refatorar para algo mais pratico ao fim
-        fun validarCpf(cpf: String): Boolean {
+        override fun valida(cpf: String): Boolean {
             val cpfClean = cpf.replace(".", "").replace("-", "")
 
             //tamanho do cpf
@@ -73,15 +73,15 @@ enum class ChaveUsuario {
             return true
         }
     },
-    TELEFONE {
-        fun validarTelefone(telefone: String): Boolean {
+    CELULAR {
+        override fun valida(telefone: String): Boolean {
             if (telefone.isNullOrBlank()) return false
 
             return telefone.matches("^\\+[1-9][0-9]\\d{1,14}$".toRegex())
         }
     },
     EMAIL {
-        fun validarEmail(email: String): Boolean {
+        override fun valida(email: String): Boolean {
             if(email.isNullOrBlank()) return false
 
             return EmailValidator().run {
@@ -91,8 +91,10 @@ enum class ChaveUsuario {
         }
     },
     CHAVEALEATORIA {
-        fun validarChaveAleatoria(chaveAleatoria: String): Boolean {
+        override fun valida(chaveAleatoria: String): Boolean {
             return chaveAleatoria.isNullOrBlank()
         }
-    }
+    };
+
+    abstract fun valida(chave: String): Boolean
 }
