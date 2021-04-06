@@ -7,7 +7,6 @@ import br.com.zup.contas.TipoConta
 import br.com.zup.core.validacoes.seguranca.ValidUUID
 import br.com.zup.core.validacoes.ValidaChavePix
 import io.micronaut.core.annotation.Introspected
-import sun.security.rsa.RSAUtil.*
 import java.time.LocalDateTime
 import java.util.*
 import javax.validation.constraints.NotBlank
@@ -24,7 +23,7 @@ data class NovaChavePix (
     @field:NotNull
     val tipoChave: TipoChave?,
     @field:Size(max = 77)
-    val chaveCadastrada: String,
+    var chaveCadastrada: String,
     @field:NotNull
     val tipoConta: TipoConta?
         ){
@@ -33,11 +32,11 @@ data class NovaChavePix (
         return ChavePix(
             chaveCadastrada = if (tipoChave == TipoChave.CHAVEALEATORIA) UUID.randomUUID().toString()
             else chaveCadastrada,
-            tipo =  tipoChave?.name!!,
+            tipo =  tipoConta?.name!!,
             conta = conta
         )
     }
-    fun paraChaveRequest(conta: Optional<Conta>): NovaChaveRequest {
+    fun paraChaveRequest(conta: Conta): NovaChaveRequest {
         return NovaChaveRequest(
             KeyType.getKeyType(tipoChave!!),
             chaveCadastrada,

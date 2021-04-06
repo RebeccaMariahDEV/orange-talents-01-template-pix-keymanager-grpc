@@ -11,7 +11,7 @@ service DesafioPixService {
   rpc cadastrar (PixRequest) returns (PixResponse) {}
 }
 enum TiposConta{
-  CONTA__NAO_DECLARADO = 0;
+  CONTA_NAO_DECLARADO = 0;
   CONTA_CORRENTE = 1;
   CONTA_POUPANCA = 2;
 }

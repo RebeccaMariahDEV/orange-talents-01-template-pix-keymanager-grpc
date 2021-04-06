@@ -6,6 +6,7 @@ import br.com.zup.chavePix.ChavePixRepository
 import br.com.zup.contas.ContaCliente
 import br.com.zup.contas.ContaRepository
 import br.com.zup.core.validacoes.exception.ChavePixException
+import io.micronaut.http.client.exceptions.HttpClientResponseException
 import io.micronaut.validation.Validated
 import javax.inject.Singleton
 import javax.transaction.Transactional
@@ -37,9 +38,19 @@ val conta = contaRepository.findByContaId(novaChave.clientId)
             var chaveGerada = novaChave.paraChave(contaCriada)
                 .let { chavePix -> chavePixRepository.save(chavePix) }
 
+            val createPixResponse = novaChave?.paraChaveRequest(contaCriada)
+                .let { chavePix -> keyManagerPixClient.cadastra(chavePix) }
 
-        }catch (){
 
+            chaveGerada = chaveGerada.let { chavePix ->
+                novaChave.chaveCadastrada = createPixResponse.key
+                chavePix.criadaEm = chaveResponse.createdAt
+                chavePixRepository.update(chavePix)
+            }
+
+            return chaveCriada
+        } catch (e: HttpClientResponseException) {
+            throw ChavePixException("A chave pix ${novaChave.chaveCadastrada} já está cadatrada")
         }
 
     }
