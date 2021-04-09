@@ -1,4 +1,6 @@
-package br.com.zup.core.exception
+package br.com.zup.core.validacoes.exception
 
-class ChavePixInvalidaException {
+import java.lang.RuntimeException
+
+class ChavePixInvalidaException(message: String = "chave pix inválida"): RuntimeException(message) {
 }

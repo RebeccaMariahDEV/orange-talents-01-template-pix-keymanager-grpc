@@ -2,15 +2,21 @@ micronaut:
   application:
     name: desafioPix
   server:
-    port: 8081
+    port: 8083
 
 #;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+#datasources:
+#  default:
+#    url: ${JDBC_URL:`jdbc:h2:mem:pix`}
+#    username: ${JDBC_USER:sa}
+#    password: ${JDBC_PASSWORD:""}
+#    driverClassName: ${JDBC_DRIVER:org.h2.Driver}
+
 datasources:
   default:
-    url: ${JDBC_URL:`jdbc:h2:mem:pix`}
-    username: ${JDBC_USER:sa}
-    password: ${JDBC_PASSWORD:""}
-    driverClassName: ${JDBC_DRIVER:org.h2.Driver}
+    url: jdbc:mysql://localhost:3308/transacao_pix?serverTimezone=UTC
+    username: root
+    password: root
 
 jpa:
   default:

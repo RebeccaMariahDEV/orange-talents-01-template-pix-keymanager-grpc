@@ -9,11 +9,9 @@ class ContaResponse(
 ) {
     fun paraConta(): Conta {
         return Conta(
-            tipo,
-            Instituicao(instituicao.nome, instituicao.ispb),
             agencia,
             numero,
-            Titular(titular.id, titular.nome, titular.cpf)
-        )
+            Instituicao(instituicao.nome, instituicao.ispb),
+            Titular(titular.id, titular.nome, titular.cpf), tipo)
     }
 }

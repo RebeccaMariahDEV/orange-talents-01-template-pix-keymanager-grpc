@@ -12,15 +12,19 @@ import javax.validation.constraints.Size
 
 @Entity
 data class ChavePix(
-    @field:NotBlank @field:Size(max = 77) val chaveCadastrada: String,
-    @field:NotNull val tipo: TipoChave,
+    @field:NotBlank @field:Size(max = 77) var chaveCadastrada: String,
+    @field:NotNull val tipo: String,
     @field:ManyToOne val conta: Conta
 ) {
     @Id
     @GeneratedValue
     val id: Long? = null
 
-    val criadaEm: LocalDate = LocalDate.now()
+    var criadaEm: LocalDate? = null
 
 //    val atualizadaEm: LocalDate = LocalDate
+
+    fun pertence(clienteId: String): Boolean{
+        return this.conta.titular?.id.equals(clienteId)
+    }
 }

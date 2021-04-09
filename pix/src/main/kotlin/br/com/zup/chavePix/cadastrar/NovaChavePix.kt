@@ -19,7 +19,7 @@ import javax.validation.constraints.Size
 data class NovaChavePix (
     @field:ValidUUID
     @field:NotBlank
-    val clientId: String,
+    val idcliente: String,
     @field:NotNull
     val tipoChave: TipoChave?,
     @field:Size(max = 77)
@@ -30,8 +30,7 @@ data class NovaChavePix (
 
     fun paraChave(conta: Conta): ChavePix{
         return ChavePix(
-            chaveCadastrada = if (tipoChave == TipoChave.CHAVEALEATORIA) UUID.randomUUID().toString()
-            else chaveCadastrada,
+            chaveCadastrada = if (tipoChave == TipoChave.CHAVEALEATORIA) UUID.randomUUID().toString() else chaveCadastrada,
             tipo =  tipoConta?.name!!,
             conta = conta
         )

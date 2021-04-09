@@ -1,4 +1,4 @@
-package br.com.zup.core.exception
+package br.com.zup.core.validacoes.exception
 
 import java.lang.RuntimeException
 

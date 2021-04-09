@@ -14,12 +14,11 @@ service DeletarPixService {
 }
 
 message DeletarPixRequest {
-  string idCliente = 1;
+  int64 idCliente = 1;
   string idChave = 2;
 
 }
 
 message DeletarPixResponse {
   string message = 1;
-   google.protobuf.Timestamp deletadoEm = 2;
 }
